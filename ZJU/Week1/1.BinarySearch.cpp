@@ -22,8 +22,8 @@ public:
 	}
 	int binarySort()
 	{
-		int left = 0;
-		int right = len - 1;
+		int left = 0;//首元素位置
+		int right = len - 1;//尾元素位置
 		while (left <= right)
 		{
 			int middle = left + ((right - left) >> 1); //右移相当于除以2
