@@ -1,52 +1,66 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <stdbool.h>
-#define MaxSize 10
-#define ElementType int
-typedef struct SNode *Statck;
+#define elementType int
+#define ERROR -233
+typedef int position;
+typedef struct SNode *ptrToSNode;
 struct SNode
 {
-    ElementType Data[MaxSize];
-    int top;
+    elementType *data;
+    position top;
+    int maxSize;
 };
+typedef ptrToSNode Stack;
 
-Statck creataStack()
+Stack createStack(int maxSize);
+bool isFull(Stack s);
+bool push(Stack s, elementType x);
+bool isEmpty(Stack s);
+elementType pop(Stack s);
+
+Stack createStack(int maxSize)
 {
-    return (Statck)calloc(1, sizeof(struct SNode));
+    Stack s = (Stack)calloc(1, sizeof(struct SNode));
+    s->data = (elementType *)calloc(maxSize, sizeof(elementType));
+    s->top = -1;
+    s->maxSize = maxSize;
+    return s;
 }
-void push(Statck p, ElementType item)
+
+bool isFull(Stack s)
 {
-    if (p->top == MaxSize - 1)
+    return (s->top == s->maxSize - 1);
+}
+
+bool push(Stack s, elementType x)
+{
+    if (isFull(s))
     {
-        printf("å †æ ˆæ»¡ï¼\n");
-        return;
+        printf("¶ÑÕ»Âú\n");
+        return false;
     }
     else
     {
-        p->Data[++(p->top)] = item;
-        return;
+        s->data[++(s->top)] = x;
+        return true;
     }
 }
 
-ElementType pop(Statck p)
+bool isEmpty(Stack s)
 {
-    if(p->top==-1)
+    return (s->top == -1);
+}
+
+elementType pop(Stack s)
+{
+    if (isEmpty(s))
     {
-        printf("ç©ºå †æ ˆ");
-        return NULL;
+        printf("¶ÑÕ»¿Õ\n");
+        return ERROR;
     }
     else
     {
-        return(p->Data[(p->top)--]);
+        return (s->data[(s->top)--]);
     }
-
-}
-
-int main()
-{
-    Statck p=creataStack();
-    push(p,233);
-    printf("%d",p->Data[1]);
-    getchar();
-    return 0;
 }
