@@ -1,7 +1,8 @@
-#include<iostream>
+#include <iostream>
 #include <stack>
 #include <cctype>
 #include <sstream>
+#include <queue>
 using namespace std;
 
 template <typename T>
@@ -44,7 +45,7 @@ public:
             if (temp == "quit")
             {
                 cout << element.top() << endl;
-                cout<<" bye"<<endl;
+                cout << " bye" << endl;
                 cin.get();
                 return;
             }
@@ -55,34 +56,59 @@ public:
             }
             else
             {
-                T t1,t2,t;
+                T t1, t2, t;
                 t1 = stringToT(element.top());
                 element.pop();
                 t2 = stringToT(element.top());
                 element.pop();
-                if(temp=="+")
+                if (temp == "+")
                 {
-                    t=t1+t2;
+                    t = t1 + t2;
                 }
-                else if(temp=="-")
+                else if (temp == "-")
                 {
-                    t=t1-t2;
+                    t = t1 - t2;
                 }
-                else if(temp=="*")
+                else if (temp == "*")
                 {
-                    t=t1*t2;
+                    t = t1 * t2;
                 }
-                else if(temp=="/")
+                else if (temp == "/")
                 {
-                    t=t1/t2;
+                    t = t1 / t2;
                 }
                 else
                 {
-                    cout<<"error"<<endl;
+                    cout << "error" << endl;
                     exit(1);
                 }
 
                 element.push(TtoString(t));
+            }
+        }
+    }
+    //层序遍历
+    void levelOrderTraversal()
+    {
+        queue<T> q;
+        position t=root;
+        if(!t)
+        {
+            return ;
+        }
+        q.push(t);
+        while(!q.empty())
+        {
+            t=q.front();
+            q.pop();
+            cout<<t->data<<endl;
+            if(t->left)
+            {
+                q.push(t->left);
+            }
+            if(t->right)
+            {
+                q.push(t->right);
             }
         }
 
