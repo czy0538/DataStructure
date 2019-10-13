@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-
 using namespace std;
 int main()
 {
@@ -59,8 +58,6 @@ else
         cout << 0 << " " << beg << " " << end;
     }
 }
-
-
     }
     else
     {
