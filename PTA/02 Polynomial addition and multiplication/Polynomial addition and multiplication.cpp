@@ -19,6 +19,7 @@ position creat(int n)
 {
     position head = new Node;
     position p = head;
+    head->next = nullptr;
     for (int i = 0; i < n; i++)
     {
         position temp = new Node;
@@ -34,12 +35,18 @@ position creat(int n)
 
 void traversing(position head)
 {
-    while (head)
+    if (head)//处理长度为0的节点
     {
-
-        cout << head->coefficient << " " << head->index << " ";
-
-        head = head->next;
+        while (head && head->next)
+        {
+            cout << head->coefficient << " " << head->index << " ";
+            head = head->next;
+        }
+        cout << head->coefficient << " " << head->index << endl;
+    }
+    else
+    {
+        cout << 0 << " " << 0 << endl;
     }
 }
 
@@ -48,6 +55,7 @@ position add(position head1, position head2)
     position front, rear, temp;
     rear = new Node;
     front = rear;
+    rear->next = nullptr;
     while (head1 && head2)
     {
         if (head1->index > head2->index)
@@ -80,7 +88,8 @@ position add(position head1, position head2)
             head1 = head1->next;
             p2 = head2;
             head2 = head2->next;
-            delete p1, p2;
+            delete p1;
+            delete p2;
         }
     }
     while (head1)
@@ -104,47 +113,61 @@ position multiplication(position p1, position p2) //不会破坏结构
     pos posHead = new PosNode; //带头节点
     pos posFirst = posHead;
     posHead->next = nullptr;
-    while (p1)
+    if (p1)
     {
-        position temp_p2 = p2;
-        //相乘产生的子链
-        position tempHead = new Node; //带头节点
-        position front = tempHead;
-        tempHead->next = nullptr;
-        while (temp_p2)
-        {
-            position tempNode = new Node;
-            tempNode->next = nullptr;
-            tempNode->coefficient = p1->coefficient * temp_p2->coefficient;
-            tempNode->index = p1->index + temp_p2->index;
-            tempHead->next = tempNode;
-            tempHead = tempNode;
-            temp_p2 = temp_p2->next;
-        }
-        tempHead = front;
-        front = front->next; //去头结点
-        delete tempHead;
-        //逐个存放乘法后的各个链表；
-        pos posTemp = new PosNode;
-        posTemp->ptr = front;
-        posTemp->next = nullptr;
-        posHead->next = posTemp;
-        posHead = posTemp;
-        p1 = p1->next;
-    }
-    //去头结点
-    posHead = posFirst;
-    posFirst = posFirst->next;
-    delete posHead;
 
-    position temp_start = posFirst->ptr;
-    posFirst = posFirst->next;
-    while (posFirst)
-    {
-        temp_start = add(temp_start, posFirst->ptr);
+        while (p1)
+        {
+            position temp_p2 = p2;
+            //相乘产生的子链
+            position tempHead = new Node; //带头节点
+            position front = tempHead;
+            tempHead->next = nullptr;
+            while (temp_p2)
+            {
+                position tempNode = new Node;
+                tempNode->next = nullptr;
+                tempNode->coefficient = p1->coefficient * temp_p2->coefficient;
+                tempNode->index = p1->index + temp_p2->index;
+                tempHead->next = tempNode;
+                tempHead = tempNode;
+                temp_p2 = temp_p2->next;
+            }
+            tempHead = front;
+            front = front->next; //去头结点
+            delete tempHead;
+            //逐个存放乘法后的各个链表；
+            pos posTemp = new PosNode;
+            posTemp->ptr = front;
+            posTemp->next = nullptr;
+            posHead->next = posTemp;
+            posHead = posTemp;
+            p1 = p1->next;
+        }
+        //去头结点
+        posHead = posFirst;
         posFirst = posFirst->next;
+        delete posHead;
+
+        position temp_start = posFirst->ptr;
+        posFirst = posFirst->next;
+        while (posFirst)
+        {
+            temp_start = add(temp_start, posFirst->ptr);
+            posFirst = posFirst->next;
+        }
+        return temp_start;
     }
-    return temp_start;
+    else
+    {
+        //处理长度为0的节点
+        position temp = new Node;
+        temp->coefficient = 0;
+        temp->index = 0;
+        temp->next = nullptr;
+
+        return temp;
+    }
 }
 
 int main()
@@ -164,13 +187,11 @@ int main()
     //     }
     // }
 
+    traversing(multiplication(t1, t2));
 
 
-        traversing(multiplication(t1, t2));
-        cout << endl;
-        traversing(add(t1, t2));
-
-
-    system("pause");
+    traversing(add(t1, t2));
+    // cout << "test";
+    // system("pause");
     return 0;
 }
