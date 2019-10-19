@@ -1,3 +1,4 @@
+//多项式的加法与乘法,要求指数递降
 #include <iostream>
 using namespace std;
 typedef struct Node
@@ -7,14 +8,14 @@ typedef struct Node
     Node *next;
 
 } * position;
-
+//用来存放各个链表头指针的结构体
 typedef struct PosNode
 {
     position ptr;
     PosNode *next;
 } * pos;
 
-// 当输入的为过多的 0 1时就崩了
+//创建链表
 position creat(int n)
 {
     position head = new Node;
@@ -32,7 +33,7 @@ position creat(int n)
     delete head;
     return p;
 }
-
+//输出链表
 void traversing(position head)
 {
     if (head)//处理长度为0的节点
@@ -49,7 +50,7 @@ void traversing(position head)
         cout << 0 << " " << 0 << endl;
     }
 }
-
+//多项式合并,会破坏原链表结构
 position add(position head1, position head2)
 {
     position front, rear, temp;
@@ -92,6 +93,7 @@ position add(position head1, position head2)
             delete p2;
         }
     }
+    //合并未处理部分
     while (head1)
     {
         rear->next = head1;
@@ -193,5 +195,6 @@ int main()
     traversing(add(t1, t2));
     // cout << "test";
     // system("pause");
+    //缺点是没有任何的删除
     return 0;
 }
