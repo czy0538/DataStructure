@@ -1,0 +1,8 @@
+﻿  String.c
+D:\A personal date\GitHub\DataStructure\4String\String\String.c(164): error C4700: 使用了未初始化的局部变量“sub”
+D:\A personal date\GitHub\DataStructure\4String\String\String.c(229): error C4700: 使用了未初始化的局部变量“S”
+D:\A personal date\GitHub\DataStructure\4String\String\String.c(230): error C4700: 使用了未初始化的局部变量“T”
+D:\A personal date\GitHub\DataStructure\4String\String\String.c(231): error C4700: 使用了未初始化的局部变量“S2”
+D:\A personal date\GitHub\DataStructure\4String\String\String.c(232): error C4700: 使用了未初始化的局部变量“V”
+D:\A personal date\GitHub\DataStructure\4String\String\String.c(250): error C4700: 使用了未初始化的局部变量“T2”
+D:\A personal date\GitHub\DataStructure\4String\String\String.c(253): error C4700: 使用了未初始化的局部变量“Sub”

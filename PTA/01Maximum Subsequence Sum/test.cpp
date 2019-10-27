@@ -1,15 +1,15 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 using namespace std;
 int main()
 {
-    vector<int> v1={1,2,3,4};
-    vector<int> v2={5,6,7};
-    v1=v2;
-    cout<<"v1:"<<endl;
-    for(auto i:v1)
+    vector<int> v1 = {1, 2, 3, 4};
+    vector<int> v2 = {5, 6, 7};
+    v1 = v2;
+    cout << "v1:" << endl;
+    for (auto i : v1)
     {
-        cout<<i<<endl;
+        cout << i << endl;
     }
     cout << "v2:" << endl;
     for (auto i : v1)
@@ -27,8 +27,8 @@ int main()
     {
         cout << i << endl;
     }
-    cout<<endl;
-    cout<<*(v1.end()-1)<<endl;
-
+    cout << endl;
+    cout << *(v1.end() - 1) << endl;
+    system("pause");
     return 0;
 }

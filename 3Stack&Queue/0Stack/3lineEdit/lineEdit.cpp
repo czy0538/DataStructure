@@ -4,7 +4,7 @@
 using namespace std;
 void lineEdit()
 {
-    string statement = {"whli##ilr#e(s#*s)\noutcha@putchar(*s=#++);"};
+    string statement = {"whli##ilr#e(s#*s)\noutcha@putchar(*s=#++);\n"};
     stack<char> c;
     stack<char> temp;
     auto itr = statement.cbegin();
@@ -19,13 +19,14 @@ void lineEdit()
                 temp.push(c.top());
                 c.pop();
             }
-            while(!temp.empty())
+            while (!temp.empty())
             {
-                cout<<temp.top();
+                cout << temp.top();
                 temp.pop();
             }
             cout << endl;
-            continue;
+
+            // continue;
         }
         else
         {
@@ -44,9 +45,7 @@ void lineEdit()
                 c.push(ch);
                 break;
             }
-
         }
-
         itr++;
     }
 }

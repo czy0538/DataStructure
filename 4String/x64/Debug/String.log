@@ -1,0 +1,3 @@
+﻿  String.cpp
+D:\A personal date\GitHub\DataStructure\4String\String\String.cpp(65,16): warning C4244: “return”: 从“__int64”转换到“int”，可能丢失数据
+  String.vcxproj -> D:\A personal date\GitHub\DataStructure\4String\String\x64\Debug\String.exe
