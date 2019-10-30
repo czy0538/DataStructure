@@ -16,7 +16,9 @@ typedef struct
 } HString;
 
 //生成串
-Status StrAssign(HString &T, char* chars)
+
+
+Status StrAssign(HString& T, char* chars)
 {
 	int i, j;
 	char* c;
@@ -42,13 +44,13 @@ Status StrAssign(HString &T, char* chars)
 }
 
 //求串长
-int StrLength(HString &S)
+int StrLength(HString& S)
 {
 	return S.length;
 }
 
 //探空
-Status StrEmpty(HString &S)
+Status StrEmpty(HString& S)
 {
 	if (S.length == 0)
 		return TRUE;
@@ -57,7 +59,7 @@ Status StrEmpty(HString &S)
 }
 
 //比较
-int StrCompare(HString &S, HString T)
+int StrCompare(HString& S, HString T)
 {
 	int i;
 	for (i = 0; i < S.length && i < T.length; i++)
@@ -67,7 +69,7 @@ int StrCompare(HString &S, HString T)
 }
 
 //清空
-Status ClearString(HString &S)
+Status ClearString(HString& S)
 {
 	if (S.ch)
 	{
@@ -79,7 +81,7 @@ Status ClearString(HString &S)
 }
 
 //连接
-Status Concat(HString &T, HString &S1, HString &S2)
+Status Concat(HString& T, HString& S1, HString& S2)
 {
 	int i, j;
 	if (!T.ch)
@@ -95,7 +97,7 @@ Status Concat(HString &T, HString &S1, HString &S2)
 }
 
 //求子串
-Status SubString(HString &Sub, HString &S, int pos, int len)
+Status SubString(HString& Sub, HString& S, int pos, int len)
 {
 	int i, j;
 	if (pos < 1 || pos > S.length || len < 0 || len > S.length - pos + 1)
@@ -200,7 +202,6 @@ Status Replace(HString S, HString T, HString V)
 			StrInsert(S, i, V);
 			i += StrLength(V); //在插入的串V后面继续查找串T
 		}
-
 	} while (i);
 
 	return OK;
@@ -215,57 +216,58 @@ void PrintStr(HString T)
 	printf("\n");
 }
 
-int main()
-{
-	HString S;
-	HString T;
-	HString V;
-	HString S2;
-	HString T2;
-	HString Sub;
-
-	//测试StrAssign()函数
-	StrAssign(S, (char*)"Hello");
-	StrAssign(T, (char*)"HelloWorld");
-	StrAssign(S2, (char*)"World");
-	StrAssign(V, (char*)"C++");
-	printf("PrintStr(S):");
-	PrintStr(S);
-
-	//测试StrLength()和StrCompare()函数
-	printf("StrLength(S):%d\n", StrLength(S));
-	printf("StrCompare(S,T):%d\n", StrCompare(S, T));
-
-	//测试StrEmpty()、ClearString()和StrCopy()函数
-	ClearString(S);
-	printf("ClearString(S):");
-	PrintStr(S);
-	printf("StrEmpty:%d\n", StrEmpty(S));
-	StrCopy(S, S2);
-	printf("StrCopy(S,S2):");
-	PrintStr(S);
-
-	//测试Concat()函数和SubString()函数
-	Concat(T2, S, S2);
-	printf("Concat(T2,S,S2):");
-	PrintStr(T2);
-	SubString(Sub, T2, 6, 5);
-	printf("SubString(Sub, T2, 6, 5):");
-	PrintStr(Sub);
-
-	//测试StrInsert()、StrDelete()和Index()函数
-	StrInsert(Sub, 1, T);
-	printf("StrInsert( Sub,1,T):");
-	PrintStr(Sub);
-	printf("Index( Sub,S2,1):%d\n", Index(Sub, S2, 1));
-	StrDelete(Sub, 6, 5);
-	printf("StrDelete(S, 6, 5):");
-	PrintStr(Sub);
-
-	//测试Replace()函数
-	Replace(Sub, S, V);
-	printf("Replace(Sub,S, V):");
-	PrintStr(Sub);
-	system("pause");
-	return 0;
-}
+//int main()
+//{
+//	HString S;
+//	HString T;
+//	HString V;
+//	HString S2;
+//	HString T2;
+//	HString Sub;
+//
+//	//测试StrAssign()函数
+//	StrAssign(S, (char*)"Hello");
+//	StrAssign(T, (char*)"HelloWorld");
+//	StrAssign(S2, (char*)"World");
+//	StrAssign(V, (char*)"C++");
+//	printf("PrintStr(S):");
+//	PrintStr(S);
+//
+//	//测试StrLength()和StrCompare()函数
+//	printf("StrLength(S):%d\n", StrLength(S));
+//	printf("StrCompare(S,T):%d\n", StrCompare(S, T));
+//
+//	//测试StrEmpty()、ClearString()和StrCopy()函数
+//	ClearString(S);
+//	printf("ClearString(S):");
+//	PrintStr(S);
+//	printf("StrEmpty:%d\n", StrEmpty(S));
+//	StrCopy(S, S2);
+//	printf("StrCopy(S,S2):");
+//	PrintStr(S);
+//
+//	//测试Concat()函数和SubString()函数
+//	Concat(T2, S, S2);
+//	printf("Concat(T2,S,S2):");
+//	PrintStr(T2);
+//	SubString(Sub, T2, 6, 5);
+//	printf("SubString(Sub, T2, 6, 5):");
+//	PrintStr(Sub);
+//
+//	//测试StrInsert()、StrDelete()和Index()函数
+//	StrInsert(Sub, 1, T);
+//	printf("StrInsert( Sub,1,T):");
+//	PrintStr(Sub);
+//	printf("Index( Sub,S2,1):%d\n", Index(Sub, S2, 1));
+//	//printf("Index_basic( Sub,S2,1):%d\n", Index_basic(Sub, S2, 1));
+//	StrDelete(Sub, 6, 5);
+//	printf("StrDelete(S, 6, 5):");
+//	PrintStr(Sub);
+//
+//	//测试Replace()函数
+//	Replace(Sub, S, V);
+//	printf("Replace(Sub,S, V):");
+//	PrintStr(Sub);
+//	system("pause");
+//	return 0;
+//}

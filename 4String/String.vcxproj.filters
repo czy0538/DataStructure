@@ -18,5 +18,11 @@
     <ClCompile Include="String.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Index.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="KMP.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,5 +1,52 @@
 # 数据结构笔记
 
+## 0C&C++知识补充
+
+### 1.变长参数表
+
+- 存在于头文件 stdarg.h / cstdarg中
+
+- 省略号表示参数表中的参数的数量和类型都是可变的。
+
+- 省略号只能出现在参数表的尾部。
+- va_list 声明一个变量，该变量依次引用各个参数，一般成为ap，意为参数指针
+- va_start 将ap初始化为指向第一个无名参数的指针，在使用ap之前，该宏必须被调用因此。**参数表必须至少包括一个有名参数**，va_start将最后一个有名参数作为起点
+- 每次调用va_arg，将返回一个参数，并将ap指向下一个参数。va_arg(ap,int)来决定返回的对象类型，指针移动的步长。
+- 最后必须在函数返回前调用va_end
+
+### 2.行列指针
+
+```cpp
+#include<iostream>
+using namespace std;
+int main()
+{
+	int a[3][4];
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			a[i][j] = i * 10 + j;
+		}
+	}
+	cout << *a << endl;//0019F93C,a为行指针，他的取值为行地址
+	cout << **a << endl;//0
+	cout << *(a + 1) << endl;//0019F94C
+	int* p0 = a[0];
+	int* p1 = a[1];
+	cout << p0 << endl;//0019F93C
+	cout << p1 << endl;//0019F94C
+	cout << *p0 << endl;//0
+	cout << *p1 << endl;//10
+	cout << *(++p1) << endl;//11
+	return 0;
+}
+```
+
+
+
+
+
 ## 1绪论
 
 ###  1.1 数据结构及其讨论范畴

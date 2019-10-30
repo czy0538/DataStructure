@@ -1,3 +1,11 @@
-﻿  String.cpp
-D:\A personal date\GitHub\DataStructure\4String\String\String.cpp(65,16): warning C4244: “return”: 从“__int64”转换到“int”，可能丢失数据
-  String.vcxproj -> D:\A personal date\GitHub\DataStructure\4String\String\x64\Debug\String.exe
+﻿  Index.cpp
+D:\A personal date\GitHub\DataStructure\4String\String.cpp(67,16): warning C4244: “return”: 从“__int64”转换到“int”，可能丢失数据
+D:\Windows Kits\10\Include\10.0.18362.0\ucrt\corecrt_math.h(967,1): warning C4005: “OVERFLOW”: 宏重定义
+D:\A personal date\GitHub\DataStructure\4String\String.cpp(5): message : 参见“OVERFLOW”的前一个定义
+D:\A personal date\GitHub\DataStructure\4String\Index.cpp(46,31): error C2440: “初始化”: 无法从“overloaded-function”转换为“size_t”
+D:\A personal date\GitHub\DataStructure\4String\Index.cpp(46,23): message : 没有使该转换得以执行的上下文
+D:\A personal date\GitHub\DataStructure\4String\Index.cpp(48,30): error C3867: “std::basic_string<char,std::char_traits<char>,std::allocator<char>>::length”: 非标准语法；请使用 "&" 来创建指向成员的指针
+D:\A personal date\GitHub\DataStructure\4String\Index.cpp(48,30): error C2446: “<”: 没有从“unsigned __int64 (__cdecl std::basic_string<char,std::char_traits<char>,std::allocator<char>>::* )(void) noexcept const”到“int”的转换
+  KMP.cpp
+  正在生成代码...
+D:\A personal date\GitHub\DataStructure\4String\Index.cpp(48,24): message : 没有使该转换得以执行的上下文
