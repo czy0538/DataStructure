@@ -43,6 +43,51 @@ int main()
 }
 ```
 
+### 3.联合与位子段
+
+#### 3.1 联合
+
+- 在单个存储区域内管理不同类型的数据。
+
+- 实现一个变量合法的保存多种数据类型中任何一种类型的对象。
+- 空间为最大的那个成员的空间
+- 访问方式同结构体
+
+#### 3.2枚举
+
+标识符的值默认从0开始依次递增。
+
+可以直接使用标识符的值。
+
+
+
+```CPP
+//这是一个广义表的定义
+#include<iostream>
+using namespace std;
+typedef int atomType;
+typedef enum//枚举
+{
+	ATOM,LIST//0,1分别表示原子和子表
+}elemTag;
+
+typedef struct glNode
+{
+	elemTag tag;//使用enum可以防止非法的tag
+	union//在该时间段只可能有一种结果，要么是原子，要么是子表，这样节约空间；
+	{
+		atomType atom;
+		struct glNode* hp;
+	};
+	struct glNode* tp=nullptr;
+}GLNode;
+
+```
+
+
+
+
+
 
 
 

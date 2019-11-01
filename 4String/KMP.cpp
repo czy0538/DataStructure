@@ -17,6 +17,10 @@ void kmpnext(char *s, int *next)
 		else
 			j = next[j];
 	}
+	for (int i = 0; i < s[0]+1; i++)
+	{
+		cout << next[i];
+	}
 }
 
 int index_kmp(char *s, char *t, int pos)
@@ -27,7 +31,7 @@ int index_kmp(char *s, char *t, int pos)
 	int j = 1;
 	while (i <= s[0] && j <= t[0])
 	{
-		if (j==0 || s[i] == t[j])
+		if (j == 0 || s[i] == t[j])
 		{
 			i++;
 			j++;
@@ -36,7 +40,6 @@ int index_kmp(char *s, char *t, int pos)
 		{
 			j = next[j];
 		}
-
 	}
 	if (j > t[0])
 	{
@@ -46,29 +49,40 @@ int index_kmp(char *s, char *t, int pos)
 	{
 		return 0;
 	}
-
-
 }
 
 int main()
 {
-	char *s = new char[10];
-	s[0] = 9;
-	for (int i = 1; i <= s[0]; i++)
+	// char *s = new char[10];
+	// s[0] = 9;
+	// for (int i = 1; i <= s[0]; i++)
+	// {
+	// 	cin >> s[i];
+	// }
+	// int *next = new int[10];
+	// kmpnext(s, next);
+	// for (int i = 0; i < 10; i++)
+	// {
+	// 	cout << next[i];
+	// }
+	// cout<<endl;
+	// char t[4]={3,'b','a','b'};
+	// cout<<index_kmp(s,t,1);
+	// delete[] next;
+	// delete[] s;
+	string str = "abcaababc";
+	char *s = new char[str.length()+1];
+	int *next=new int[str.length()+1];
+	s[0] = str.length();
+
+	auto itr = str.cbegin();
+	for (int i = 1; i < str.length(); i++)
 	{
-		cin >> s[i];
+		s[i] = *itr;
+		++itr;
 	}
-	int *next = new int[10];
-	kmpnext(s, next);
-	for (int i = 0; i < 10; i++)
-	{
-		cout << next[i];
-	}
-	cout<<endl;
-	char t[4]={3,'b','a','b'};
-	cout<<index_kmp(s,t,1);
-	delete[] next;
-	delete[] s;
+	kmpnext(s,next);
+
 	system("pause");
 	return 0;
 }
