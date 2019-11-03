@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stack>
 using namespace std;
+
 template <typename T>
 class BinTree
 {
@@ -41,7 +42,8 @@ public:
             }
             if (!s.empty())
             {
-                pos = s.pop(); //second
+                pos = s.top(); //second
+                s.pop();
                 pos = pos->right;
             }
         }
@@ -71,7 +73,8 @@ public:
             }
             if(!s.empty())
             {
-                pos=s.pop();//second
+                pos=s.top();//second
+                s.pop();
                 cout<<pos->data<<endl;
                 pos=pos->right;
             }
@@ -91,25 +94,5 @@ public:
 
     void stack_postOrderTravelsal()
     {
-        position pos = root;
-        stack<position> s;
-        while (pos || !s.empty())
-        {
-            while (pos)
-            {
-                s.push(pos); //first
-                pos = pos->left;
-            }
-            if (!s.empty())
-            {
-                pos = s.pop(); //second
-                pos = pos->right;
-            }
-        }
-        while(!s.empty())
-        {
-            cout<<s.pop()<<endl;
-        }
     }
-
 };
