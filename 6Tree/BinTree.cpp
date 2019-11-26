@@ -8,13 +8,13 @@ using T = char;
 class BinTree
 {
 private:
-    struct TreeNode
+    typedef struct TreeNode
     {
         T data;
         TreeNode *left;
         TreeNode *right;
-    };
-    typedef TreeNode *position;
+    } * position;
+    //typedef TreeNode *position;
     position root = nullptr;
 
 public:
@@ -41,20 +41,19 @@ public:
         {
             while (pos)
             {
-                s.push(pos); //first
                 cout << pos->data << endl;
+                s.push(pos);
                 pos = pos->left;
             }
             if (!s.empty())
             {
-                pos = s.top(); //second
+                pos = s.top()->right;
                 s.pop();
-                pos = pos->right;
             }
         }
     }
     //中序
-    void inOrderTraversal()
+    void inOrderTravelsal()
     {
         inOrderTravelsal(root);
     }
@@ -62,9 +61,9 @@ public:
     {
         if (pos)
         {
-            preOrderTravelsal(pos->left);
+            inOrderTravelsal(pos->left);
             cout << pos->data << endl;
-            preOrderTravelsal(pos->right);
+            inOrderTravelsal(pos->right);
         }
     }
 
@@ -76,12 +75,12 @@ public:
         {
             while (pos)
             {
-                s.push(pos); //first
+                s.push(pos);
                 pos = pos->left;
             }
             if (!s.empty())
             {
-                pos = s.top(); //second
+                pos = s.top();
                 s.pop();
                 cout << pos->data << endl;
                 pos = pos->right;
@@ -98,15 +97,56 @@ public:
 
         if (pos)
         {
-            preOrderTravelsal(pos->left);
-            preOrderTravelsal(pos->right);
+            postOrderTravelsal(pos->left);
+            postOrderTravelsal(pos->right);
             cout << pos->data << endl;
         }
     }
 
     void stack_postOrderTravelsal()
     {
+        //通过结构体记录指针和第几次访问该节点
+        struct PosData
+        {
+            bool flag = false;
+            position pos = nullptr;
+        };
+        position pos = root;
+        stack<PosData> s;
+        PosData pd;
+        while (pos || !s.empty())
+        {
+            while (pos)
+            {
+                //第一次访问到底
+                pd.flag = false;
+                pd.pos = pos;
+                s.push(pd);
+                pos = pos->left;
+            }
+            if (!pos)
+            {
+
+                pd = s.top();
+                s.pop();
+                pos = pd.pos;
+                if (!pd.flag)
+                {
+                    //第二次取出后再放回
+                    pd.flag = true;
+                    s.push(pd);
+                    pos = pos->right;
+                }
+                else
+                {
+                    //第三次取出
+                    cout << pos->data << endl;
+                    pos = nullptr;//必须赋空，否则会被重复压入
+                }
+            }
+        }
     }
+
 
     //创建树
     void creatTree()
@@ -159,7 +199,10 @@ int main()
 {
     BinTree tree;
     tree.creatTree();
-    tree.preOrderTravelsal();
+    // tree.preOrderTravelsal();
+    // tree.stack_preOrderTravelsal();
+    tree.postOrderTravelsal();
+    tree.stack_postOrderTravelsal();
 
     system("pause");
     return 0;

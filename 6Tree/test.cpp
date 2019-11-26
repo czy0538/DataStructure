@@ -1,18 +1,15 @@
-#include<stack>
-#include<iostream>
-#include<stdio.h>
+#include <stack>
+#include <iostream>
+#include <stdio.h>
 using namespace std;
+typedef struct fuck
+{
+    int i;
+} * hehe;
 int main()
 {
-    stack<int> test;
-    test.push(1);
-    test.push(2);
-    test.push(3);
-    cout<<test.size()<<endl;
-    for(int i=0;i<3;i++)
-    {
-        cout<<test.top()<<endl;
-        test.pop();
-    }
+    hehe a = new fuck;
+    a->i = 0;
+    cout << a->i;
     return 0;
 }
