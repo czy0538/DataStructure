@@ -18,5 +18,13 @@
     <ClCompile Include="邻接表.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="AdjList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AdjList.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
