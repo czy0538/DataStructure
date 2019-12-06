@@ -17,7 +17,8 @@ private:
 	{
 		int adjvex;//指向的顶点
 		ArcNode* next;//下一个弧的指针
-		//InfoType info;//其他信息，如网的边权值
+		double info;//权值
+		
 	};
 	//顶点表
 	typedef struct VNode
@@ -36,10 +37,12 @@ private:
 	ALGraph graph;
 public:
 	void creatGraph();
-	void insertArc(int i, int j);
+	void insertArc(int i, int j,double z);
 	void BFSTraverse();
 	void BFS(int v, std::queue<int>& q, bool visited[]);
 	void visit(int i);
 	void DFS(int v, bool visited[]);
 	void DFSTraverse();
+	int Prim();
+	int findMin(double dist[]);
 };

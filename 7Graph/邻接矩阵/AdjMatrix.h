@@ -29,10 +29,13 @@ protected:
 	MGraph graph;
 public:
 	void creatGraph();
+	void creatTree(int vexNum,int arcNum);
 	void BFSTraverse();
 	void BFS(int v, std::queue<int>& q, bool visited[]);
 	void visit(int i);
 	void DFS(int v, bool visited[]);
 	void DFSTraverse();
+	int Prim();
+	int findMin(double dist[]);
 	
 };

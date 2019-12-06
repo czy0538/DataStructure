@@ -12,5 +12,6 @@ int main()
 	graph.creatGraph();
 	graph.BFSTraverse();
 	graph.DFSTraverse();
+	cout << graph.Prim() << endl;
 	return 0;
 }

@@ -1,2 +1,3 @@
 ﻿  AdjList.cpp
+D:\A personal date\GitHub\DataStructure\7Graph\邻接表\AdjList.cpp(213,9): warning C4244: “return”: 从“double”转换到“int”，可能丢失数据
   邻接表.vcxproj -> D:\A personal date\GitHub\DataStructure\7Graph\邻接表\Debug\邻接表.exe

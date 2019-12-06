@@ -4,11 +4,12 @@
 #include<queue>
 using namespace std;
 
-void Graph::insertArc(int i, int j)
+void Graph::insertArc(int i, int j, double z)
 {
 	ArcNode* arcNode = new ArcNode;
 	arcNode->next = graph.vertices[i].first;
 	arcNode->adjvex = j;
+	arcNode->info = z;
 	graph.vertices[i].first = arcNode;
 }
 void Graph::creatGraph()
@@ -46,18 +47,19 @@ void Graph::creatGraph()
 	for (int i = 0; i < arcNum; i++)
 	{
 		int x, y;
-		cout << "请分别输入插入的起始节点和终止节点" << endl;
-		cin >> x >> y;
+		double z;
+		cout << "请分别输入插入的起始节点和终止节点以及权值" << endl;
+		cin >> x >> y >> z;
 		switch (graph.kind)
 		{
 		case UDG:
 		case UDN:
-			insertArc(x, y);
-			insertArc(y, x);
+			insertArc(x, y, z);
+			insertArc(y, x, z);
 			break;
 		case DG:
 		case DN:
-			insertArc(x, y);
+			insertArc(x, y, z);
 			break;
 		}
 
@@ -123,11 +125,11 @@ void Graph::DFS(int v, bool visited[])
 		int t = p->adjvex;
 		if (!visited[t])
 		{
-			DFS(t,visited);
+			DFS(t, visited);
 		}
 		p = p->next;
 	}
-	
+
 }
 
 void Graph::DFSTraverse()
@@ -147,3 +149,83 @@ void Graph::DFSTraverse()
 	}
 }
 
+int Graph::Prim()
+{
+	if (graph.kind != UDN && graph.kind != UDG)
+	{
+		cout << "这不是无向图" << endl;
+		return -1;
+	}
+	double dist[MaxVertexNum];//距离数组
+	int parent[MaxVertexNum];//前驱数组
+	double lowcost = 0;//累计的权值
+	//初始化两个数组
+	dist[0] = 0;
+	parent[0] = -1;
+	for (int i = 1; i < graph.vexnum; i++)
+	{
+		dist[i] = HUGE_VAL;
+		parent[i] = 0;
+	}
+	auto p = graph.vertices[0].first;
+	while (p != nullptr)
+	{
+		auto i = p->adjvex;
+		dist[i] = p->info;
+		p = p->next;
+	}
+	cout << "节点编号:" << 0 << "节点信息:" << graph.vertices[0].data << endl;
+	while (true)
+	{
+		int t = findMin(dist);
+		if (t == -1)//所有的节点都被改写/出现不连通的节点时退出
+		{
+			break;
+		}
+		lowcost += dist[t];
+		cout << "节点编号:" << t << "节点信息:" << graph.vertices[t].data << "权值：" << dist[t] << endl;
+		dist[t] = 0;
+		auto p = graph.vertices[t].first;
+		while (p != nullptr)
+		{
+			auto i = p->adjvex;
+			if (p->info < dist[i])
+			{
+				parent[i] = t;//更改前驱
+				dist[i] = p->info;//更改距离
+			}
+			p = p->next;
+		}
+
+	}
+
+	for (int i = 1; i < graph.vexnum; i++)
+	{
+		cout << "当前节点：" << i << "的前驱节点为" << parent[i] << endl;
+		if (dist[i] != 0)
+		{
+			cout << "这个图不连通" << endl;
+		}
+	}
+
+
+
+	return lowcost;
+}
+
+//返回与父节点之间权值最小的节点
+int Graph::findMin(double dist[])
+{
+	double min = HUGE_VAL;
+	int vex = -1;
+	for (int i = 1; i < graph.vexnum; i++)
+	{
+		if (dist[i] < min && dist[i] != 0)
+		{
+			min = dist[i];
+			vex = i;
+		}
+	}
+	cout << vex << endl;
+	return vex;
+}

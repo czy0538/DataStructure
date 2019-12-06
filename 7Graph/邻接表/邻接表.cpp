@@ -11,5 +11,6 @@ int main()
 	g.creatGraph();
 	g.BFSTraverse();
 	g.DFSTraverse();
+	cout<<g.Prim();
 	return 0;
 }

@@ -65,7 +65,7 @@ void Graph::BFSTraverse()
 	}
 }
 
-void Graph::BFS(int v, std::queue<int> & q, bool visited[])
+void Graph::BFS(int v, std::queue<int>& q, bool visited[])
 {
 	visit(v);
 	visited[v] = true;
@@ -74,7 +74,7 @@ void Graph::BFS(int v, std::queue<int> & q, bool visited[])
 	{
 		v = q.front();
 		q.pop();
-		
+
 		for (int i = 0; i < graph.vexnum; i++)
 		{
 			if (!isinf(graph.edge[v][i].adjvex))
@@ -93,7 +93,7 @@ void Graph::BFS(int v, std::queue<int> & q, bool visited[])
 
 void Graph::visit(int i)
 {
-	cout << "顶点编号:"<<i<<",顶点信息:" << graph.vex[i] << endl;
+	cout << "顶点编号:" << i << ",顶点信息:" << graph.vex[i] << endl;
 }
 
 void Graph::DFS(int v, bool visited[])
@@ -127,4 +127,83 @@ void Graph::DFSTraverse()
 			DFS(i, visited);
 		}
 	}
+}
+
+void Graph::creatTree(int vexNum, int arcNum)
+{
+	MGraph tree;
+	tree.arcnum = arcNum;
+	tree.vexnum = vexNum;
+	tree.kind = UDN;
+}
+int Graph::Prim()
+{
+	if (graph.kind != UDN && graph.kind != UDG)
+	{
+		cout << "这不是无向图" << endl;
+		return -1;
+	}
+	double dist[MAX_VERTEX_NUM];//距离数组
+	int parent[MAX_VERTEX_NUM];//前驱数组
+	double lowcost = 0;//累计的权值
+	//初始化两个数组
+	dist[0] = 0;
+	parent[0] = -1;
+	for (int i = 1; i < graph.vexnum; i++)
+	{
+		dist[i] = graph.edge[0][i].adjvex;
+		parent[i] = 0;
+	}
+	cout << "节点编号:" << 0 << "节点信息:" << graph.vex[0] << endl;
+	while (true)
+	{
+		int t = findMin(dist);
+		if (t == -1)//所有的节点都被改写/出现不连通的节点时退出
+		{
+			break;
+		}
+		lowcost += dist[t];
+		cout << "节点编号:" << t << "节点信息:" << graph.vex[t] << "权值：" << dist[t] << endl;
+		dist[t] = 0;
+
+		for (int i = 1; i < graph.vexnum; i++)
+		{
+			//t节点到某个节点更近
+			if (graph.edge[t][i].adjvex < dist[i])
+			{
+				parent[i] = t;//更改前驱
+				dist[i] = graph.edge[t][i].adjvex;//更改距离
+			}
+		}
+	}
+
+	for (int i = 1; i < graph.vexnum; i++)
+	{
+		cout << "当前节点：" << i << "的前驱节点为" << parent[i] << endl;
+		if (dist[i] != 0)
+		{
+			cout << "这个图不连通" << endl;
+		}
+	}
+
+
+
+	return lowcost;
+}
+
+//返回与父节点之间权值最小的节点
+int Graph::findMin(double dist[])
+{
+	double min = HUGE_VAL;
+	int vex = -1;
+	for (int i = 1; i < graph.vexnum; i++)
+	{
+		if (dist[i] < min && dist[i] != 0)
+		{
+			min = dist[i];
+			vex = i;
+		}
+	}
+	cout << vex << endl;
+	return vex;
 }
