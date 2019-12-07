@@ -11,6 +11,7 @@ int main()
 	g.creatGraph();
 	g.BFSTraverse();
 	g.DFSTraverse();
-	cout<<g.Prim();
+	cout << g.Prim() << endl;
+	cout << g.Kruskal();
 	return 0;
 }

@@ -1,3 +1,2 @@
-﻿  AdjMatrix.cpp
-D:\A personal date\GitHub\DataStructure\7Graph\邻接矩阵\AdjMatrix.cpp(191,9): warning C4244: “return”: 从“double”转换到“int”，可能丢失数据
+﻿  main.cpp
   邻接矩阵.vcxproj -> D:\A personal date\GitHub\DataStructure\7Graph\邻接矩阵\Debug\邻接矩阵.exe

@@ -43,6 +43,7 @@ public:
 	void visit(int i);
 	void DFS(int v, bool visited[]);
 	void DFSTraverse();
-	int Prim();
+	double Prim();
 	int findMin(double dist[]);
+	double Kruskal();
 };

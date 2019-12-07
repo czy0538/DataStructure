@@ -13,5 +13,6 @@ int main()
 	graph.BFSTraverse();
 	graph.DFSTraverse();
 	cout << graph.Prim() << endl;
+	graph.topologicalSort();
 	return 0;
 }

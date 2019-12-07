@@ -2,13 +2,16 @@
 #include<iostream>
 #include<queue>
 #include<cmath>
+#include<stack>
+#define GRAPH_KIND DN;
 using namespace std;
 
 void Graph::creatGraph()
 {
 	cout << "请依次输入图的顶点和边数" << endl;
 	cin >> graph.vexnum >> graph.arcnum;
-	graph.kind = UDG;
+	//图的类型设置
+	graph.kind = GRAPH_KIND;
 	for (int i = 0; i < graph.vexnum; i++)
 	{
 		cout << "请输入图的第" << i << "个顶点的值:";
@@ -136,7 +139,7 @@ void Graph::creatTree(int vexNum, int arcNum)
 	tree.vexnum = vexNum;
 	tree.kind = UDN;
 }
-int Graph::Prim()
+double Graph::Prim()
 {
 	if (graph.kind != UDN && graph.kind != UDG)
 	{
@@ -206,4 +209,65 @@ int Graph::findMin(double dist[])
 	}
 	cout << vex << endl;
 	return vex;
+}
+
+void Graph::topologicalSort()
+{
+	stack<int> vec;
+	//构建入度数组
+	int indegree[MAX_VERTEX_NUM];
+	for (int i = 0; i < graph.vexnum; i++)
+	{
+		indegree[i] = countIndegree(i);
+		if (indegree[i] == 0)
+		{
+			//将所有入度为0的顶点拽到栈里面
+			vec.push(i);
+		}
+	}
+	int count = 0;
+	while (!vec.empty())
+	{
+		auto t = vec.top();
+		vec.pop();
+		cout << "顶点" << t << ":" << graph.vex[t] << endl;
+		count++;
+		//删除该顶点，跟该顶点的后继入度-1
+		for (int i = 0; i < graph.vexnum; i++)
+		{
+			if (!isinf(graph.edge[t][i].adjvex))
+			{
+				
+				if ((--indegree[i]) == 0)
+				{
+					vec.push(i);
+				}
+			}
+		}
+	}
+	if (count < graph.vexnum)
+	{
+		cout << "有回路，终止交易" << endl;
+	}
+	else
+	{
+		cout << "拓扑排序结束" << endl;
+	}
+	
+	
+}
+
+int Graph::countIndegree(int v)
+{
+	int num = 0;
+	for (int i = 0; i < graph.vexnum; i++)
+	{
+		if (!isinf(graph.edge[i][v].adjvex))
+		{
+			num++;
+		}
+	}
+	
+	
+	return num;
 }

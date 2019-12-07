@@ -2,6 +2,7 @@
 #include<iostream>
 #include<string>
 #include<queue>
+#include<cmath>
 using namespace std;
 
 void Graph::insertArc(int i, int j, double z)
@@ -149,7 +150,7 @@ void Graph::DFSTraverse()
 	}
 }
 
-int Graph::Prim()
+double Graph::Prim()
 {
 	if (graph.kind != UDN && graph.kind != UDG)
 	{
@@ -228,4 +229,75 @@ int Graph::findMin(double dist[])
 	}
 	cout << vex << endl;
 	return vex;
+}
+
+double Graph::Kruskal()
+{
+	if (graph.kind != UDN && graph.kind != UDG)
+	{
+		cout << "这不是无向图" << endl;
+		return -1;
+	}
+	bool isSelected[MaxVertexNum];
+	for (int i = 0; i < MaxVertexNum; i++)
+	{
+		isSelected[i] = false;
+	}
+	auto graph = this->graph;
+	int n = graph.vexnum;
+	double lowcost = 0;
+	//
+	while (n > 1)
+	{
+		int x = 0, y = 0;
+		double mincost = HUGE_VAL;
+		for (int i = 0; i < graph.vexnum; i++)
+		{
+			auto p = graph.vertices[i].first;
+			while (p != nullptr)
+			{
+				if (isSelected[i] && isSelected[p->adjvex])//判断方法有问题
+				{
+					//p->info = HUGE_VAL;
+					p = p->next;
+					continue;
+				}
+				if (p->info < mincost)
+				{
+					x = i;
+					y = p->adjvex;
+					mincost = p->info;
+				}
+				p = p->next;
+			}
+
+		}
+		isSelected[x] = true;
+		isSelected[y] = true;
+		lowcost += mincost;
+		cout << "添加" << x << "," << y << "之间的边,权值为" << mincost << endl;
+		auto p = graph.vertices[x].first;
+		while (p != nullptr)
+		{
+			if (p->adjvex == y)
+			{
+				p->info = HUGE_VAL;
+				break;
+			}
+			p = p->next;
+		}
+
+		auto q = graph.vertices[y].first;
+		while (q != nullptr)
+		{
+			if (q->adjvex == x)
+			{
+				q->info = HUGE_VAL;
+				break;
+			}
+			q = q->next;
+		}
+		n--;
+	}
+	return lowcost;
 }

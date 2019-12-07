@@ -15,7 +15,7 @@ private:
 	} GraphKind;//图的类型
 	struct EdgeType
 	{
-		double adjvex;
+		double adjvex;//权值
 		InfoType info;
 	};
 	typedef struct
@@ -35,7 +35,9 @@ public:
 	void visit(int i);
 	void DFS(int v, bool visited[]);
 	void DFSTraverse();
-	int Prim();
+	double Prim();
 	int findMin(double dist[]);
+	void topologicalSort();
+	int countIndegree(int v);
 	
 };

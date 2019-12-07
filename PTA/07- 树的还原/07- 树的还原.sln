@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "07- 树的还原", "07- 树的还原.vcxproj", "{E72FA29C-42D4-4240-A014-EA073F387072}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E72FA29C-42D4-4240-A014-EA073F387072}.Debug|x64.ActiveCfg = Debug|x64
+		{E72FA29C-42D4-4240-A014-EA073F387072}.Debug|x64.Build.0 = Debug|x64
+		{E72FA29C-42D4-4240-A014-EA073F387072}.Debug|x86.ActiveCfg = Debug|Win32
+		{E72FA29C-42D4-4240-A014-EA073F387072}.Debug|x86.Build.0 = Debug|Win32
+		{E72FA29C-42D4-4240-A014-EA073F387072}.Release|x64.ActiveCfg = Release|x64
+		{E72FA29C-42D4-4240-A014-EA073F387072}.Release|x64.Build.0 = Release|x64
+		{E72FA29C-42D4-4240-A014-EA073F387072}.Release|x86.ActiveCfg = Release|Win32
+		{E72FA29C-42D4-4240-A014-EA073F387072}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {462300CB-8E38-44FB-A323-44986CF71FE5}
+	EndGlobalSection
+EndGlobal
