@@ -1,19 +1,27 @@
 #include <iostream>
 #include <vector>
 #include<algorithm>
+#define ERROR -1
 using namespace std;
 int getTreeH(int N, vector<char>& pre, vector<char>& mid)
 {
 	if (N == 1) return 1;
 	if (N == 0) return 0;
-	int index = 0;
-	for (int i = 0; i < N; ++i)
+	int index = 0; 
+	int i = 0;
+	for (i = 0; i < N; ++i)
 	{
 		if (mid[i] == pre[0])
 		{
 			index = i;
 			break;
 		}
+	}
+	if (i == N)
+	{
+		cout << "ÐòÁÐÊäÈë´íÎó" << endl;
+		return -1;
+		exit(0);
 	}
 	vector<char> newpre1;
 	for (int i = 1; i <= index; ++i)
