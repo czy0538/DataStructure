@@ -1,7 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include<sstream>
 #include<string>
-#include<cstring>
+#include<cstdlib>
 #include<cmath>
 #include<vector>
 #include<cctype>
@@ -30,10 +31,14 @@ private:
 
 	int talbleSize;
 public:
-	Hash(int length) :talbleSize(length) {}
+	Hash(int length) :talbleSize(length)
+	{
+		createTable();
+	}
 	Hash()
 	{
 		talbleSize = 100;
+		createTable();
 	}
 	HashTable h;
 
@@ -83,11 +88,13 @@ public:
 			p->count++;
 		}
 	}
+
 	~Hash()
 	{
 		delete[] h->heads;
 		delete h;
 	}
+
 	//位移映射法求散列函数
 	int hash(const char* key)
 	{
@@ -144,54 +151,72 @@ public:
 	}
 	void countWords()
 	{
-		//有点问题这地方
+		
 		int N;
 		cin >> N;
-		vector<vector<string>> data;
+		cin.get();
+		vector<vector<string>> data(N);
 		for (int i = 0; i < N; i++)
 		{
-			string temp;
-			getline(cin, temp);
-			stringstream ss;
-			ss << temp;
-			if (temp == "#")
+			while (true)
 			{
-				continue;
-			}
-			else
-			{
-				while (!ss.eof())
-				{
-					ss >> temp;
-					string t;
-					int i;
-					for (i = 0; i < temp.size(); ++i)
-					{
-						if (isalpha(temp[i]))
-						{
-							temp[i] == tolower(temp[i]);
-						}
-						else
-						{
-							++i;
-							t = temp.substr(i, temp.size() - i);
-							temp = temp.substr(0, i - 1);
-							break;
-						}
-					}
-					data[i].push_back(temp);
-					for (int j = 0; j < t.size(); j++)
-					{
-						if (isalpha(temp[i]))
-						{
-							temp[i] == tolower(temp[i]);
-						}
-					}
-				}
+				string temp;
+				getline(cin, temp);
+				cout << temp.size() << endl;
 
+				stringstream ss;
+				ss << temp;
+				if (temp == "#")
+				{
+					break;
+				}
+				else
+				{
+					while (!ss.eof())
+					{
+						ss >> temp;
+						string t;
+						int k;
+						for (k = 0; k < temp.size(); ++k)
+						{
+							if (isalpha(temp[k]))
+							{
+								temp[k] = (char)tolower(temp[k]);
+							}
+							else
+							{
+								++k;
+								t = temp.substr(k, temp.size() - k);
+								temp = temp.substr(0, k - 1);
+								break;
+							}
+						}
+						data[i].push_back(temp);
+						for (int j = 0; j < t.size(); j++)
+						{
+							if (isalpha(t[j]))
+							{
+								t[j] = tolower(t[j]);
+							}
+						}
+						if (t.size() > 0)
+							data[i].push_back(t);
+					}
+
+				}
+			}
+
+		}
+		for (auto a : data)
+		{
+			for (auto b : a)
+			{
+				cout << b << endl;
 			}
 		}
 	}
+
+
 	bool isWord(char c)
 	{
 		if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')
@@ -201,7 +226,7 @@ public:
 	//string s保证为纯字母字符串
 	int getWord(string s, elementType word)
 	{
-		elementType word;
+		
 		int len = 0;
 		for (auto ch : s)
 		{
@@ -217,3 +242,11 @@ public:
 		return len;
 	}
 };
+
+int main()
+{
+	Ex4Search ex;
+	ex.countWords();
+	
+	return 0;
+}
