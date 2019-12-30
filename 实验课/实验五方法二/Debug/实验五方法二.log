@@ -1,0 +1,4 @@
+﻿  源.c
+D:\A personal date\GitHub\DataStructure\实验课\实验五方法二\源.c(85,26): error C2057: 应输入常量表达式
+D:\A personal date\GitHub\DataStructure\实验课\实验五方法二\源.c(85,26): error C2466: 不能分配常量大小为 0 的数组
+D:\A personal date\GitHub\DataStructure\实验课\实验五方法二\源.c(85,27): error C2133: “stu”: 未知的大小
