@@ -193,6 +193,90 @@ public:
             }
         }
     }
+
+    int countLeaf(position tree,int& num)
+    {
+        if(t!=nullptr)
+        {
+            if(t->left==nullptr&&t->right==nullptr)
+            {
+                num++;
+            }
+            else
+            {
+                countLeaf(t->left,num);
+                countLeaf(t->right,num);
+            }
+
+        }
+        return num;
+    }
+
+    int treeDepth(position p)
+    {
+        if(p=nullptr)
+        {
+            h=0;
+        }
+        else
+        {
+            int h=0,lh=0,rh=0;
+            lh=treeDepth(p->left);
+            rh=treeDepth(p->right);
+            if(lh>rh)
+            {
+                h=lh+1;
+            }
+            else
+            {
+                h=rh+1;
+            }
+        }
+        return h;
+
+    }
+
+    bool equal(position t1,position t2)
+    {
+        bool x=false;
+        if(t1==nullptr&&t2==nullptr)
+        {
+            x=true;
+        }
+        else
+        {
+            if(t1->left&&t2->left)
+            {
+                if(t1->data==t2->data)
+                {
+                    x=equal(t1->right,t2->right);
+
+                }
+            }
+        }
+        return x;
+
+    }
+    position copy(position old)
+    {
+        position temp=new TreeNode;
+        {
+            if(old==nullptr)
+            {
+                return nullptr;
+            }
+            else
+            {
+                temp->left=copy(old->left);
+                temp->right=copy(old->right);
+                temp->data=old->data;
+                return temp;
+            }
+
+        }
+
+    }
+
 };
 
 int main()
